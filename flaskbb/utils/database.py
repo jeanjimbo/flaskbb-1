@@ -38,7 +38,7 @@ def make_comparable(cls):
 
 class CRUDMixin(object):
     def __repr__(self):
-        return "<{}>".format(self.__class__.__name__)
+        return f"<{self.__class__.__name__}>"
 
     @classmethod
     def create(cls, **kwargs):
@@ -127,9 +127,7 @@ class HideableMixin(object):
     def hidden_by_id(cls):  # noqa: B902
         return db.Column(
             db.Integer,
-            db.ForeignKey(
-                "users.id", name="fk_{}_hidden_by".format(cls.__name__)
-            ),
+            db.ForeignKey("users.id", name=f"fk_{cls.__name__}_hidden_by"),
             nullable=True,
         )
 

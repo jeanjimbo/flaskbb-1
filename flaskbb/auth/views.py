@@ -80,9 +80,7 @@ class Login(MethodView):
         self.authentication_manager_factory = authentication_manager_factory
 
     def form(self):
-        if enforce_recaptcha(limiter):
-            return LoginRecaptchaForm()
-        return LoginForm()
+        return LoginRecaptchaForm() if enforce_recaptcha(limiter) else LoginForm()
 
     def get(self):
         return render_template("auth/login.html", form=self.form())
